@@ -17,5 +17,5 @@ public:
 	Node *a, *b;
 	
 private:
-	float length;
+	float length_;
 };

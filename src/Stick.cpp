@@ -1,9 +1,9 @@
 #include "../include/Stick.hpp"
 
 Stick::Stick(Node *a, Node *b) : a(a), b(b) {
-    length = Vector2Distance(a->getPosition(), b->getPosition());
+    length_ = Vector2Distance(a->getPosition(), b->getPosition());
     printf("New Stick: (%f %f), (%f %f)\n", a->getPosition().x, a->getPosition().y, b->getPosition().x, b->getPosition().y);
-    printf("Length: %f\n", length);
+    printf("\tLength: %f\n", length_);
 }
 
 void Stick::update() {
@@ -11,10 +11,10 @@ void Stick::update() {
     Vector2 stickDirection = Vector2Normalize(Vector2Subtract(a->getPosition(), b->getPosition()));
     
     if (a->isMovable())
-        a->setPosition(Vector2Add(center, Vector2Scale(stickDirection, length / 2)));
+        a->setPosition(Vector2Add(center, Vector2Scale(stickDirection, length_ / 2)));
 
     if (b->isMovable())    
-        b->setPosition(Vector2Add(center, Vector2Scale(stickDirection, -length / 2)));
+        b->setPosition(Vector2Add(center, Vector2Scale(stickDirection, -length_ / 2)));
 }
 
 void Stick::draw() const {
