@@ -2,8 +2,8 @@
 #include "../include/Stick.hpp"
 #include "../include/game.h"
 
-std::vector<Node*> nodes;
-std::vector<Stick*> sticks;
+static std::vector<Node*> nodes;
+static std::vector<Stick*> sticks;
 
 float linePointDistSqr(Vector2 p1, Vector2 p2, Vector2 pt) {
     Vector2 a = Vector2Subtract(pt, p1);
@@ -27,6 +27,12 @@ void Update()
     static Node *firstNode = NULL;
     static bool isPaused = true;
     static bool isMovable = true;
+
+    if (isPaused) {
+        for (auto node : nodes) {
+            node->draw();
+        }
+    }
     
     if (IsKeyPressed(KEY_SPACE)) isPaused = !isPaused;
     if (IsKeyPressed(KEY_A)) {
@@ -53,14 +59,11 @@ void Update()
         DrawLineEx(firstNode->getPosition(), mousePos, LINE_THICKNESS, LINE_COLOR);
     }
 
-    // Guard clause
-    if (inNode) return;
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !inNode) {
         nodes.push_back(new Node(mousePos, isMovable));
-    }
+    }    
 
-
+    // Guard clause
     if (isPaused) return;
     
     for (auto node : nodes) {
@@ -69,14 +72,15 @@ void Update()
     }
 
     for (int i = 0; i < 1; i++) {
-        int j = 0;
+        int j = -1;
         for (auto stick : sticks) {
+            j++;
             float dist = linePointDistSqr(stick->a->getPosition(), stick->b->getPosition(), mousePos);
             if (dist < 25 && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
                 sticks.erase(sticks.begin() + j);
+                continue;
             }
             stick->update();
-            j++;
         }
     }
 }
@@ -87,7 +91,5 @@ void Draw()
         stick->draw();
     }
 
-    for (auto node : nodes) {
-        node->draw();
-    }
+    // 
 }
