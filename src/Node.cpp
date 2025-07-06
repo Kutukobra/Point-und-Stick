@@ -19,15 +19,12 @@ bool Node::isMovable() const {
 }
 
 void Node::update() {
-    Vector2 positionTemp = position_;
+    velocity_ = Vector2Subtract(position_, positionPrevious_);
+    positionPrevious_ = position_;
 
     acceleration_ = {0, GRAVITY};
 
-    velocity_ = Vector2Subtract(position_, positionPrevious_);
-
     position_ = Vector2Add(position_, Vector2Add(velocity_, Vector2Scale(acceleration_, GetFrameTime() * GetFrameTime())));
-
-    positionPrevious_ = positionTemp;
 }
 
 void Node::draw() const {
