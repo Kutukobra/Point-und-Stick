@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include <vector>
-#define GRAVITY 2
+#define GRAVITY 2000
 
 #define NODE_SIZE 10
 
