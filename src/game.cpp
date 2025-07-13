@@ -5,6 +5,7 @@
 static std::vector<Node*> nodes;
 static std::vector<Stick*> sticks;
 
+// Calculates distance to a line segment (squared). Used mostly to detect distance to edges.
 float linePointDistSqr(Vector2 p1, Vector2 p2, Vector2 pt) {
     Vector2 a = Vector2Subtract(pt, p1);
     Vector2 b = Vector2Subtract(p2, p1);
@@ -49,7 +50,7 @@ void Update()
                 firstNode = node;
                 break;
             } else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && firstNode != NULL && firstNode != node) {
-                sticks.push_back(new Stick(firstNode, node));
+                sticks.push_back(new Stick(firstNode, node)); // Memory concerns, smart pointer implementation otw
                 firstNode = NULL;
             } 
         }
@@ -71,7 +72,8 @@ void Update()
             node->update();
     }
 
-    for (int i = 0; i < 1; i++) {
+    // More iterations makes more ridgid edges (komputasi lebih akurat)
+    for (int i = 0; i < 20; i++) {
         int j = -1;
         for (auto stick : sticks) {
             j++;

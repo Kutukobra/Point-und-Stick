@@ -24,7 +24,7 @@ void Node::update() {
 
     acceleration_ = {0, GRAVITY};
 
-    position_ = Vector2Add(position_, Vector2Add(velocity_, Vector2Scale(acceleration_, GetFrameTime() * GetFrameTime())));
+    position_ = Vector2Add(position_, Vector2Add(velocity_, Vector2Scale(acceleration_, GetFrameTime() * GetFrameTime()))); // Verlet integration
 }
 
 void Node::draw() const {
