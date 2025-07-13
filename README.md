@@ -15,7 +15,10 @@ Simple 2D rope/cloth simulation with C++ and Raylib. Implements verlet's integra
 - Press `SPACE` to play/pause the simulation.
 - Drag mouse right click accross edges to 'cut' the edges.
 
-## Screenshots
+## Showcase
+### Video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EK1Ics1mIuE?si=6CzSE8IejgExcDEn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ### Editing to setup nodes
 ![Edit](https://i.imgur.com/eKXwvWd.png)  
 
